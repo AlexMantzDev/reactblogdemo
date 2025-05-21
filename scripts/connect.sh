@@ -1,0 +1,1 @@
+mongosh "mongodb://amantz:pass5851@localhost:27017/reactblog?authSource=admin";
