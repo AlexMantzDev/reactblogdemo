@@ -4,3 +4,8 @@
   display: flex;
   flex-direction: column;
 }
+
+body {
+  background-color: aliceblue;
+  background-image: url("./assets/gplay.png");
+}
