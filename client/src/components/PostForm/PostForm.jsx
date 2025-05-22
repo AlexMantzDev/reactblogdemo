@@ -5,8 +5,8 @@ import "./PostForm.css";
 
 function PostForm(props) {
   const [newPost, setNewPost] = useState({
-    title: "",
-    content: "",
+    title: props.title,
+    content: props.content,
   });
 
   function handleChange(event) {
@@ -51,7 +51,7 @@ function PostForm(props) {
         </Form.Group>
         <div className="d-flex justify-content-end mt-3">
           <Button variant="primary" type="button" onClick={submitForm}>
-            Submit
+            {props.buttonText}
           </Button>
         </div>
       </Form>
