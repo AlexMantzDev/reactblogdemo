@@ -1,8 +1,10 @@
 import { useState } from "react";
-import "./App.css";
-import Post from "./components/Post";
 import { useEffect } from "react";
-import PostForm from "./components/PostForm";
+import { Container, Card } from "react-bootstrap";
+
+import "./App.css";
+import Post from "./components/Post/Post";
+import PostForm from "./components/PostForm/PostForm";
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -34,15 +36,35 @@ function App() {
     }
   }
 
+  async function deletePost(id) {
+    try {
+      const res = await fetch(`/api/v1/posts/${id}`, { method: "DELETE" });
+      await res.json();
+      await getPosts();
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   return (
-    <div>
-      <PostForm onSubmit={handleSubmit}></PostForm>
-      {posts.map((post) => {
-        return (
-          <Post key={post._id} title={post.title} content={post.content}></Post>
-        );
-      })}
-    </div>
+    <Container className="my-4">
+      <Card className="mb-4 shadow-sm">
+        <Card.Body>
+          <Card.Title>Create a New Post</Card.Title>
+          <PostForm onSubmit={handleSubmit} />
+        </Card.Body>
+      </Card>
+
+      {posts.map((post) => (
+        <Post
+          key={post._id}
+          id={post._id}
+          title={post.title}
+          content={post.content}
+          onDelete={deletePost}
+        />
+      ))}
+    </Container>
   );
 }
 
