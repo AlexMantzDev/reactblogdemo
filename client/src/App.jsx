@@ -5,6 +5,7 @@ import { Container, Card } from "react-bootstrap";
 import "./App.css";
 import Post from "./components/Post/Post";
 import PostForm from "./components/PostForm/PostForm";
+import Header from "./components/Header/Header";
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -61,31 +62,34 @@ function App() {
   }
 
   return (
-    <Container className="my-4">
-      <Card className="mb-4 shadow-sm">
-        <Card.Body>
-          <Card.Title>Create a New Post</Card.Title>
-          <PostForm
-            onSubmit={handleSubmit}
-            title={""}
-            content={""}
-            buttonText="Submit"
-          />
-        </Card.Body>
-      </Card>
+    <>
+      <Header></Header>
+      <Container className="my-4">
+        <Card className="mb-4 shadow-sm">
+          <Card.Body>
+            <Card.Title>Create a New Post</Card.Title>
+            <PostForm
+              onSubmit={handleSubmit}
+              title={""}
+              content={""}
+              buttonText="Submit"
+            />
+          </Card.Body>
+        </Card>
 
-      {posts.map((post) => (
-        <Post
-          isEditMode={false}
-          key={post._id}
-          id={post._id}
-          title={post.title}
-          content={post.content}
-          onDelete={deletePost}
-          onSaveEdit={saveEdit}
-        />
-      ))}
-    </Container>
+        {posts.map((post) => (
+          <Post
+            isEditMode={false}
+            key={post._id}
+            id={post._id}
+            title={post.title}
+            content={post.content}
+            onDelete={deletePost}
+            onSaveEdit={saveEdit}
+          />
+        ))}
+      </Container>
+    </>
   );
 }
 
